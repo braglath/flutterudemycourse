@@ -185,6 +185,8 @@ _An optional container for grouping together multiple form field widgets (e.g. T
 [FormClass](https://api.flutter.dev/flutter/widgets/Form-class.html)
 
 you can create a global key above the main build widget, this help in validation of the form, check the code below
+
+<hr>
 <final GlobalKey<FormState> formkey = GlobalKey<FormState>();>
 
 # **TextFormField**
