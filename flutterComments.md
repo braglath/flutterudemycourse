@@ -181,13 +181,17 @@ _BLOC Pattern_ - Recommended by Flutter team, but complicated
 # **Form**
 
 _An optional container for grouping together multiple form field widgets (e.g. TextField widgets)_
+_the values in the form always gets stored in FormState_
 
 [FormClass](https://api.flutter.dev/flutter/widgets/Form-class.html)
 
 you can create a global key above the main build widget, this help in validation of the form, check the code below
 
-<hr>
 <final GlobalKey<FormState> formkey = GlobalKey<FormState>();>
+
+**Key**
+_this takes in the GlobalKey we created with the FormState_
+<key: GlobalKeyName,>
 
 # **TextFormField**
 
@@ -208,3 +212,87 @@ _this takes in InputDecoration()_
 
 * <hintText> - this is a String, it displays a text which will be inside the form greyed out
   <hintText: 'you@gmail.com',>
+
+**validator**
+_this is to validate the values inside the form_
+_GlobalKey validation uses this function to validate_
+<validator: (value){
+we return null if the value is valid or we return a string if the value is invalid
+here you can put if statements for validation like
+if(value.isempty()){
+return 'cannot be empty'
+}
+}>
+
+**onSaved**
+_this saves the value inside the form-field_
+_GlobalKey save function uses this to save the values_
+
+# **GlobalKey**
+
+_A key that is unique across the entire app_
+[global key](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html)
+use the _FormState_ - this is where the value of the form are gets stored
+_create a GlobalKey associated with the FormState_
+<Final GlobalKey<FormState> nameit = GlobalKey<FormState>();>
+and then pass the GlobalKey to the Form
+
+# **FormState**
+
+_State associated with a Form widget_
+[FormState](https://api.flutter.dev/flutter/widgets/FormState-class.html)
+
+# **OnPressed function when submit button is pressed**
+
+_we can use the global key to validate or do more functions when the button is tapped_
+
+**reset**
+<onPressed: (){
+formkey.currentState?. reset(); - this resets all the value in the form
+}>
+
+**validate**
+<onPressed: (){
+formkey.currentState?. validate(); - _this check the validation property in every single child inside the form_
+}>
+
+**save**
+_validate first and then save the value_
+<onPressed: () {
+if (formkey.currentState!.validate()) {
+formkey.currentState?.save();
+};}>
+
+# **Mixin**
+
+_a Mixin is a class that contains methods for use by other classes without having to be the parent class of those other classes.” In other words mixins are normal classes from which we can borrow methods(or variables) from without extending the class_
+[mixin class](https://medium.com/flutter-community/https-medium-com-shubhamhackzz-dart-for-flutter-mixins-in-dart-f8bb10a3d341#:~:text=%E2%80%9CIn%20object%2Doriented%20programming%20languages,from%20without%20extending%20the%20class.)
+
+**Step 1** - create a dart file with a class
+**Step 2** - inside the class create different validation class as Strings
+**Step 3** - in the main class where you want to call the validation functions, after the extends add with and the mixin dart file name
+**Step 4** - then you can reference the mixin individual validation class names in validation
+
+_Mixin dart file code_
+<class validationMixin {
+String? validateEmail(value) {
+if (!value!.contains('@')) {
+return 'Please enter a valid email';
+}
+return null;
+}>
+
+<String? validatePassword(value) {
+if (value!.isEmpty) {
+return 'password cannot be empty';
+}
+if (value.length < 4) {
+return 'minimum 4 characters required';
+}
+return null;
+}
+}>
+
+# **Streams**
+
+_Streams are a source of asynchronous data events_
