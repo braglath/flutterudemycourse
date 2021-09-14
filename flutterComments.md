@@ -274,13 +274,13 @@ _a Mixin is a class that contains methods for use by other classes without havin
 **Step 4** - then you can reference the mixin individual validation class names in validation
 
 _Mixin dart file code_
-class validationMixin {
+<class validationMixin {
 String? validateEmail(value) {
 if (!value!.contains('@')) {
 return 'Please enter a valid email';
 }
 return null;
-}
+}>
 
 <String? validatePassword(value) {
 if (value!.isEmpty) {
