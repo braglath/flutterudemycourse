@@ -296,3 +296,23 @@ return null;
 # **Streams**
 
 _Streams are a source of asynchronous data events_
+
+# **BLOC**
+
+_always try to use only stateless widget when using bloc_
+
+# **TextField**
+
+[TextFieldCladd](https://api.flutter.dev/flutter/material/TextField-class.html)
+_A text field lets the user enter text_
+
+- Text field does not work with form widget like we do with TextInputField
+- but it has all the properties as TextInputField
+
+**onChanged**
+_called when the user changes the value_
+
+**errorText**
+_this goes inside decoration property_
+_called when their is an error in the text_
+_like when a user types something wrong_
