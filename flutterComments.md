@@ -301,6 +301,19 @@ _Streams are a source of asynchronous data events_
 
 _always try to use only stateless widget when using bloc_
 
+**getter**
+_getter gives access to some property within that class_
+
+- sample code
+
+  Function(String) get changeEmail => emailController.sink.add;
+
+  Stream<String> get emailchange =>emailController.stream;
+
+**Public and Private field**
+_weather or not we can see the property in some other field or not_
+_prefix with underscore(\_) at the start to mark the property as private_
+
 # **TextField**
 
 [TextFieldCladd](https://api.flutter.dev/flutter/material/TextField-class.html)
