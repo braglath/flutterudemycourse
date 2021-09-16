@@ -3,8 +3,8 @@ import 'package:flutterudemycourse/formValidation/app.dart';
 import 'package:flutterudemycourse/src/app.dart';
 
 void main() {
-  // runApp(const MyApp());
-  runApp(formValidation());
+  runApp(const MyApp());
+  // runApp(formValidation());
 }
 
 class MyApp extends StatelessWidget {

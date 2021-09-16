@@ -19,35 +19,95 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int counter = 0;
   List<ImageModel> images = [];
+  String numCarry = '';
+  String noOfParticipants = '0';
+  final GlobalKey<FormState> gKey = GlobalKey<FormState>();
 
-  void fetchImage() async {
-    counter++; // this increments the variable by 1 everytime we make a request
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos/$counter'));
+  void fetchImage(value) async {
+    counter++;
+    noOfParticipants =
+        value; // this increments the variable by 1 everytime we make a request
+    final response = await http.get(Uri.parse(
+        'https://www.boredapi.com/api/activity?participants=$noOfParticipants'));
     final imageModel = ImageModel.fromJson(json.decode(response.body));
 
     setState(() {
-      images.add(
-          imageModel); //every time we get a json data for image Model we save it in images and the list will keep growing
+      images.add(imageModel);
+      print(
+          noOfParticipants); //every time we get a json data for image Model we save it in images and the list will keep growing
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
-      body: ImageList(images),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        onPressed: fetchImage,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
+      body: Container(
+        // height: 50.0,
+        padding: EdgeInsets.all(30.0),
+        child: Column(
+          children: <Widget>[
+            Text('Your Activity'),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: 0.0),
+                child: ImageList(images),
+              ),
+            ),
+            forms()
+          ],
         ),
       ),
       appBar: AppBar(
         title: Text('Flutter Udemy Course'),
         backgroundColor: Colors.amber,
       ),
+    );
+  }
+
+  Widget forms() {
+    return Container(
+      child: Form(
+        key: gKey,
+        child: Column(
+          children: <Widget>[
+            participantsChoice(),
+            submitButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget participantsChoice() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      initialValue: '1',
+      decoration: InputDecoration(
+        labelText: 'No of participants',
+        hintText: 'Max 8 participants',
+      ),
+      onSaved: (value) {
+        String? numCarry = value;
+        fetchImage(value);
+      },
+    );
+  }
+
+  Widget submitButton() {
+    return ElevatedButton(
+        onPressed: () {
+          if (gKey.currentState!.validate()) {
+            gKey.currentState?.save();
+          }
+        },
+        child: Text('Submit'));
+  }
+
+  Widget activityText(ImageModel images) {
+    return Container(
+      child: Text(images.activity),
     );
   }
 }

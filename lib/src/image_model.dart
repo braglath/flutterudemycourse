@@ -1,12 +1,9 @@
 class ImageModel {
-  late int id;
-  late String title;
-  late String url;
-
-  ImageModel(this.id, this.title, this.url);
-  ImageModel.fromJson(Map<String,dynamic>parsedJson) {
-    id = parsedJson['id'];
-    title = parsedJson['title'];
-    url = parsedJson['url'];
+  late String activity;
+  late int  participants;
+  ImageModel(this.activity, this.participants);
+  ImageModel.fromJson(Map<String, dynamic> parsedJson) {
+    activity = parsedJson['activity'];
+    participants = parsedJson['participants'];
   }
 }
